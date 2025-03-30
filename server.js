@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const registerRoute = require('./routes/registerRoute');
+const adminRoute = require('./routes/adminRoute');
 const cors = require('cors');
 require('dotenv').config(); 
 
@@ -13,6 +14,8 @@ app.use(cors());
 
 
 app.use('/api/applications', registerRoute);
+app.use('/api/administrators', adminRoute);
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_DB_URI)
 .then(() => {
@@ -23,6 +26,8 @@ mongoose.connect(process.env.MONGO_DB_URI)
         console.log(`Server is running on http://localhost:${PORT}`);
     });
 })
+
+
 .catch(err => {
     console.error("Error connecting to MongoDB:", err);
     process.exit(1); // Exit process if the connection fails
