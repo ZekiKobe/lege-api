@@ -88,6 +88,17 @@ router.get("/user-detail/:uid", async (req, res) => {
       res.status(500).json({ message: "Server error" });
     }
   });
+
+  router.delete("/delete/:id", async (req,res) => {
+    try {
+        const application = await Application.findByIdAndDelete(req.params.id);
+        if (!application) return res.status(404).json({ message: "Applicant not found" });
+        res.status(200).json({ message: "Applicant deleted successfully" });
+    } catch (error){
+        res.status(500).json({ message: "Server Error",error });
+    }
+    }
+  );
   
 
   
