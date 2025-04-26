@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const registerRoute = require('./routes/registerRoute');
 const adminRoute = require('./routes/adminRoute');
+const messageRoute = require('./routes/messageRoute');
 const cors = require('cors');
 require('dotenv').config(); 
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use('/api/applications', registerRoute);
 app.use('/api/administrators', adminRoute);
+app.use('/api/messages',messageRoute);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_DB_URI)
